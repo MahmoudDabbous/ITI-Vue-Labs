@@ -6,6 +6,7 @@
         <th>Name</th>
         <th>Age</th>
         <th>Role</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +14,11 @@
         <td>{{ item.name }}</td>
         <td>{{ item.age }}</td>
         <td>{{ item.role }}</td>
+        <td>
+          <button @click="deleteItem(index)" class="btn btn-danger">
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -25,6 +31,11 @@ export default {
     data: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    deleteItem(index) {
+      this.$emit("delete", index);
     },
   },
 };

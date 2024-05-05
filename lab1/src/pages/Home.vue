@@ -55,8 +55,12 @@
       </li>
     </ul>
     <div class="mt-5">
-      <Table v-if="userFlag" :data="users" />
-      <Table v-if="adminFlag" :data="admins" />
+      <Table v-if="userFlag" :data="users" @delete="deleteUser($event)"></Table>
+      <Table
+        v-if="adminFlag"
+        :data="admins"
+        @delete="deleteUser($event)"
+      ></Table>
     </div>
   </div>
 </template>
@@ -103,6 +107,13 @@ export default {
     displayAdmins() {
       this.adminFlag = true;
       this.userFlag = false;
+    },
+    deleteUser(index) {
+      if (this.adminFlag) {
+        this.admins.splice(index, 1);
+      } else {
+        this.users.splice(index, 1);
+      }
     },
   },
 };
